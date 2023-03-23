@@ -1,0 +1,5 @@
+run = ["npm", "run", "example"]
+entrypoint = "example.js"
+
+[nix]
+channel = "stable-22_11"

@@ -1,18 +1,26 @@
 {
   "name": "buffy",
-  "version": "1.0.0",
+  "version": "2.0.0",
+  "main": "index.js",
   "description": "A simple proxy",
   "type": "module",
-  "scripts": {
-    "start": "node index.js"
-  },
   "keywords": [],
-  "author": "3kh0 and retronbv",
+  "contributors": [
+    {
+      "name": "3kh0",
+      "email": "echo-the-coder@tuta.io",
+      "url": "https://3kh0.github.io"
+    },
+    {
+      "name": "mdoryammilwalrus"
+    },
+    {
+      "name": "retronbv",
+      "url": "https://retron.dev"
+    }
+  ],
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^18.11.9",
-    "express": "^4.18.2",
-    "node-fetch": "^3.2.10",
-    "kuler": "^2.0.0"
+    "axios": "^1.3.4"
   }
 }

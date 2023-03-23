@@ -1,0 +1,22 @@
+{
+  "name": "buffy-example",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "contributors": [
+    {
+      "name": "retronbv",
+      "url": "https://retron.dev"
+    },
+    {
+      "name": "mdoryammilwalrus"
+    }
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "connect": "^3.7.0",
+    "kuler": "^2.0.0"
+  }
+}
