@@ -1,31 +1,33 @@
-import http from 'node:http';
-import fetch from 'node-fetch'; // How we are actually proxying the assets
-import kuler from 'kuler'; // Console colors
+import axios from "axios";
 
-console.log(`
-██████╗ ██╗   ██╗███████╗███████╗██╗   ██╗
-██╔══██╗██║   ██║██╔════╝██╔════╝╚██╗ ██╔╝
-██████╔╝██║   ██║█████╗  █████╗   ╚████╔╝ 
-██╔══██╗██║   ██║██╔══╝  ██╔══╝    ╚██╔╝  
-██████╔╝╚██████╔╝██║     ██║        ██║   
-╚═════╝  ╚═════╝ ╚═╝     ╚═╝        ╚═╝                                          
-`);
+export default class Buffy {
+  constructor(opts) {
+    this.url = new URL(opts.url).toString();
+    if(this.url.endsWith("/")) this.url = this.url.slice(0, this.url.length - 1);
+    this.validateStatus = opts.validateStatus ? opts.validateStatus : (status) => status >= 200 && status < 300;
+  }
 
-const server = http.createServer();
-const url = "https://3kh0.github.io";
-const PORT = process.env.PORT || 8080;
-
-server.on('request', async (req, res) => {
-    const asset = await fetch(url + req.url); // Get the asset from the website
-    const body = new Buffer.from(await asset.arrayBuffer()); // Get the buffer of the asset
-    res.writeHead(asset.status, { "Content-Type": asset.headers.get("content-type").split(";")[0] }); // Send the HTTP status code set the MIME type
-    res.end(body); // Write the asset to the response
-});
-
-server.on('listening', () => {
-  console.log(kuler(`Server has been started! Listening on port ${PORT}`, "#00ff00"));
-  console.log("Link to view: " + kuler(`https://${process.env.REPL_SLUG}.${process.env.REPL_OWNER}.repl.co`, "#0000ff"));
-});
-
-// Here we start the proxy
-server.listen({ port: PORT })
+  /**
+   * Proxy a Request
+   * @param {Request} req 
+   * @param {Response} res 
+   * @param {Function} next 
+   */
+  async request(req, res, next) {
+    try {
+      // Get the asset from the website as a Stream
+      const response = await axios({
+        method: req.method,
+        url: this.url + req.url,
+        responseType: "stream",
+        validateStatus: this.validateStatus
+      });
+      // Send the HTTP status code and the MIME type
+      res.writeHead(response.status, { "Content-Type": response.headers.get("content-type").split(";")[0] });
+      // Pipe the asset to the response
+      response.data.pipe(res);
+    } catch(error) {
+      next();
+    }
+  }
+}

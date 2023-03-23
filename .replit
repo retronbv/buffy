@@ -1,6 +1,0 @@
-run = ["npm", "start"]
-entrypoint = "index.js"
-language = "nodejs"
-
-[nix]
-channel = "stable-22_05"
