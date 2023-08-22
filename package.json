@@ -1,18 +1,18 @@
 {
   "name": "buffy",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A simple proxy",
   "type": "module",
   "scripts": {
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "3kh0 and retronbv",
+  "author": "retronbv",
   "license": "ISC",
   "dependencies": {
     "@types/node": "^18.14.6",
-    "express": "^4.18.2",
-    "node-fetch": "^3.3.0",
-    "kuler": "^2.0.0"
+    "content-type": "^1.0.5",
+    "kuler": "^2.0.0",
+    "node-fetch": "^3.3.0"
   }
 }
