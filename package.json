@@ -10,7 +10,7 @@
   "author": "retronbv",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^18.14.6",
+    "@types/node": "^20.5.4",
     "content-type": "^1.0.5",
     "kuler": "^2.0.0",
     "node-fetch": "^3.3.0"
